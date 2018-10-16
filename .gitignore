@@ -1,6 +1,7 @@
 # Mac
-**.DS_Store
+.DS_Store
 
 # Terraform
-/terraform
+.terraform/
+terraform
 terraform.zip
