@@ -18,3 +18,11 @@ jobs:
               terraform plan
             fi 
           working_directory: ~/terraform/sample/ec2
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              terraform init
+              terraform plan
+              # terraform apply 
+            fi 
+          working_directory: ~/terraform/sample/ec2
