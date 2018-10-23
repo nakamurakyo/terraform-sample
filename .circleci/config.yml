@@ -10,9 +10,10 @@ jobs:
       - checkout
       - run: terraform get -update=true # 現状のSourceだと不要
       - run:
+          working_directory: ./sample/ec2
           command: |
             if [ `expr "${CIRCLE_BRANCH}" : "develop"` -gt 0 ]; then
               terraform init
               terraform plan
             fi 
-          working_directory: ./sample/ec2
+          
