@@ -1,4 +1,18 @@
 version: 2
-test:
-  override:
-    - exit 0
+jobs:
+  build:
+    docker:
+      - image: hashicorp/terraform:0.11.8
+    working_directory: ~/terraform
+    environment:
+      AWS_DEFAULT_REGION: ap-northeast-1
+    steps:
+      - checkout
+      - run: terraform get -update=true # 現状のSourceだと不要
+      - run:
+          command: |
+            if [ `expr "${CIRCLE_BRANCH}" : "develop"` -gt 0 ]; then
+              terraform init
+              terraform plan
+            fi 
+          working_directory: ./sample/ec2
