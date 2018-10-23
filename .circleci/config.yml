@@ -12,6 +12,7 @@ jobs:
           command: terraform get -update=true # 現状のSourceだと不要
           working_directory: ~/terraform/sample/ec2
       - run:
+          name: planing at terraform
           command: |
             if [ `expr "${CIRCLE_BRANCH}" : "develop"` -gt 0 ]; then
               terraform init
@@ -19,6 +20,7 @@ jobs:
             fi 
           working_directory: ~/terraform/sample/ec2
       - deploy:
+          name: deploy at terraform
           command: |
             if [ "${CIRCLE_BRANCH}" == "develop" ]; then
               terraform init
